@@ -1,5 +1,5 @@
 <div class="main posts-index">
-  <div class="container" width="980">
+  <div class="container">
     <% @posts.each do |post| %>
       <% content=post.content %>
       <% name=post.user.name %>
@@ -23,7 +23,9 @@
         </div>
         <div class="post-main">
           <p>
-            <%== content.gsub(/な/,"にゃ") %>
+            <%= link_to("/posts/#{post.id}") do %>
+              <%== content.gsub(/な/,"にゃ") %>
+            <% end %>
           </p>
         </div>
         <div class="post-imgs">
@@ -71,11 +73,12 @@
             </div>
             <div class="post-main">
                 <p>
-                <%== quote.content.gsub(/な/,"にゃ") %>
+                <%= link_to("/posts/#{quote.id}") do %>
+                  <%== quote.content.gsub(/な/,"にゃ") %>
+                <% end %>
                 </p>
             </div>
             <div class="post_link">
-              <%= link_to("投稿の詳細へ", "/posts/#{quote.id}") %>
             </div>
           <% else %>
               <p>投稿は削除されました</p>
@@ -105,10 +108,6 @@
           </div>
         </div>
         <% end %>
-        
-        <div class="post_link">
-          <%= link_to("投稿の詳細へ", "/posts/#{post.id}") %>
-        </div>
       </div>
     <% end %>
   </div>

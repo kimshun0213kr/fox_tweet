@@ -4,7 +4,7 @@
     <title>Fox_tweet</title>
     <%= csrf_meta_tags %>
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&display=swap" rel="stylesheet"> 
-
+    <meta name="viewport" cintent="width=debice-width,initial-scale=1">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="shortcut icon" href="/assets/icon.ico" type="image/vnd.microsoft.icon">
@@ -18,11 +18,7 @@
   <body>
     <header>
       <div class="header-logo">
-        <% if @current_user %>
-          <%= link_to("きつねのつぶやき", "/posts/index") %>
-        <% else %>
-          <%= link_to("きつねのつぶやき", "/") %>
-        <% end %>
+        <%= link_to("きつねのつぶやき", "/posts/index") %>
       </div>
       <ul class="header-menus">
         <% if @current_user %>
@@ -39,11 +35,8 @@
                 <% end %>
               <% end %>
             <%= link_to("/users/#{@current_user.id}") do %>
-              <%== name %>
+              <img class="header_icon" src= "<%= "/user_images/#{@current_user.image_name}" %>">
             <% end %>
-          </li>
-          <li>
-            <%= link_to("投稿一覧", "/posts/index") %>
           </li>
           <li>
             <%= link_to("新規投稿", "/posts/new") %>
@@ -60,13 +53,6 @@
         <% else %>
           <li>
             <%= link_to("きつねのお部屋", "https://dengeki-tdu.github.io/DENGEKI/") %>
-          </li>
-          <li>
-            <%= link_to("投稿一覧", "/posts/index") %>
-          </li>
-          <li>
-            <%= link_to("ログイン", "/login") %>
-          </li>
         <% end %>
       </ul>
     </header>
