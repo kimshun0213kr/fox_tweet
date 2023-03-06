@@ -4,7 +4,7 @@
     <title>Fox_tweet</title>
     <%= csrf_meta_tags %>
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&display=swap" rel="stylesheet"> 
-    <meta name="viewport" cintent="width=debice-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width" />
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="shortcut icon" href="/assets/icon.ico" type="image/vnd.microsoft.icon">
@@ -55,6 +55,32 @@
             <%= link_to("きつねのお部屋", "https://dengeki-tdu.github.io/DENGEKI/") %>
         <% end %>
       </ul>
+      <% if @current_user %>
+      <ul class="header-menus_min">
+          <li>
+            <%= link_to("きつねのお部屋", "https://dengeki-tdu.github.io/DENGEKI/") %>
+          </li>
+          <li>
+            <%= link_to("/users/#{@current_user.id}") do %>
+              <img class="header_icon" src= "<%= "/user_images/#{@current_user.image_name}" %>">
+            <% end %>
+          </li>
+          <li>
+            <%= link_to("新規投稿", "/posts/new") %>
+          </li>
+          <li>
+            <%= link_to("絵文字一覧", "/emoji") %>
+          </li>
+          <li>
+            <%= link_to("絵文字追加", "/emoji/new") %>
+          </li>
+          <li>
+            <%= button_to("ログアウト", "/logout", {method: "post"}) %>
+          </li>
+        </ul>
+        <% else %>
+            <%= link_to("きつねのお部屋", "https://dengeki-tdu.github.io/DENGEKI/") %>
+        <% end %>
     </header>
 
     <% if flash[:notice] %>
