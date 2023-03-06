@@ -14,10 +14,6 @@
     <div class="quote-from">
     <% name=@post.user.name %>
         <% @emojis.each do |emoji| %>
-            <% if emoji.gif %>
-                <% @post.content.gsub!(/:#{emoji.content}:/,"\<img class=\"emoji\" src=\"/emoji/#{emoji.content}.gif\"\>") %>
-                <% name.gsub!(/:#{emoji.content}:/,"\<img class=\"user-emoji\" src=\"/emoji/#{emoji.content}.gif\"\>") %>
-            <% else %>
                 <% @post.content.gsub!(/:#{emoji.content}:/,"\<img class=\"emoji\" src=\"/emoji/#{emoji.content}.png\"\>") %>
                 <% name.gsub!(/:#{emoji.content}:/,"\<img class=\"user-emoji\" src=\"/emoji/#{emoji.content}.png\"\>") %>
             <% end %>

@@ -38,7 +38,7 @@ ul, li {
 
 a {
   text-decoration: none;
-  color: #2d3133;
+  color: #1e1e1e;
   font-size: 14px;
 }
 
@@ -58,8 +58,8 @@ form input[type="submit"] {
 
 /* 共通レイアウト ================================ */
 body {
-  color: #2d3133;
-  background-color: #3ecdc6;
+  color: #1e1e1e;
+  background-color: #fc8819;
   margin: 0;
   min-height: 1vh;
 }
@@ -144,7 +144,7 @@ header {
   height: auto;
   min-height: 100%;
   color: white;
-  background-color: #3ecdc6;
+  background-color: #4d3217;
   background-repeat: no-repeat;
   background-position: center 50%;
   background-size: cover;
@@ -229,7 +229,7 @@ header {
 }
 
 .form input[type="submit"] {
-  background-color: #3ecdc6;
+  background-color: #4d3217;
   color: white;
   cursor: pointer;
   font-weight: 300;
@@ -250,7 +250,7 @@ header {
 .flash {
   padding: 10px 0;
   color: white;
-  background: rgb(251, 170, 88);
+  background: #fc8819;
   text-align: center;
   position: absolute;
   top: 64px;
@@ -281,7 +281,7 @@ header {
 }
 
 .post-user-name a:hover {
-  color: #3ecdc6;
+  color: #4d3217;
 }
 
 .post-left {
@@ -378,7 +378,7 @@ header {
 }
 
 .user-name a:hover {
-  color: #3ecdc6;
+  color: #4d3217;
 }
 
 .user-left {
@@ -440,7 +440,7 @@ header {
 }
 
 .user-tabs li.active {
-  border-bottom: 2px solid #3ecdc6;
+  border-bottom: 2px solid #4d3217;
 }
 
 .user-tabs li.active a {
@@ -459,7 +459,7 @@ header {
 }
 
 .posts-index-item a{
-  color:#3ecdc6;
+  color:#fc8819;
 }
 
 .posts-img{
@@ -505,7 +505,7 @@ button{
 }
 
 .post-user-name a:hover {
-  color: #3ecdc6;
+  color: #4d3217;
 }
 
 .posts-show form {
