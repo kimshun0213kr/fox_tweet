@@ -72,18 +72,32 @@ body {
   min-height: 100%;
   background-color: #f5f8fa;
 }
+@media screen and (min-width: 961px)
+{
+  .container {
+    max-width: 600px;
+    margin: 120px auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    clear: both;
+  }
+}
 
-.container {
-  max-width: 600px;
-  margin: 60px auto;
-  padding-left: 15px;
-  padding-right: 15px;
-  clear: both;
+@media screen and (max-width: 960px)
+{
+  .container {
+    width: 100%;
+    margin: 120px auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    clear: both;
+  }
 }
 
 /* ヘッダー ================================ */
 header {
-  height: 64px;
+  background-color: #fc8819;
+  height: 128px;
   position: absolute;
   z-index: 1;
   width: 100%;
@@ -253,7 +267,7 @@ header {
   background: #4d3217;
   text-align: center;
   position: absolute;
-  top: 64px;
+  top: 128px;
   z-index: 10;
   width: 100%;
   border-radius: 0 0 2px 2px;
