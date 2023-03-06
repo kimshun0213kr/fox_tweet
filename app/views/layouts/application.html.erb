@@ -58,7 +58,7 @@
       <% if @current_user %>
       <details class="header-menus_min">
       <summary>
-        <img class="menu_img" src="/menu/menu.png">
+      <img class="menu_img" src= "<%= "/user_images/#{@current_user.image_name}" %>">
       </summary>
       <ul>
           <li>
@@ -84,15 +84,11 @@
         </ul>
         </details>
         <% else %>
-            <%= link_to("きつねのお部屋", "https://dengeki-tdu.github.io/DENGEKI/") %>
+        <div class="header-menus_min">
+        <%= link_to("きつねのお部屋", "https://dengeki-tdu.github.io/DENGEKI/") %>
+        </div>
         <% end %>
     </header>
-
-    <% if flash[:notice] %>
-      <div class="flash">
-        <%= flash[:notice] %>
-      </div>
-    <% end %>
     
     <%= yield %>
   </body>
