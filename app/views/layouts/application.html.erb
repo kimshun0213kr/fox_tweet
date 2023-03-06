@@ -17,9 +17,7 @@
 
   <body>
     <header>
-      <div class="header-logo">
-        <%= link_to("きつねのつぶやき", "/posts/index") %>
-      </div>
+      <a class="header-logo" href="/posts/index">きつねのつぶやき</a>
       <ul class="header-menus">
         <% if @current_user %>
         <li>
@@ -55,14 +53,36 @@
             <%= link_to("きつねのお部屋", "https://dengeki-tdu.github.io/DENGEKI/") %>
         <% end %>
       </ul>
-    </header>
-
-    <% if flash[:notice] %>
-      <div class="flash">
-        <%= flash[:notice] %>
+      <% if @current_user %>
+      <%= link_to("/users/#{@current_user.id}") do %>
+        <img class="header_icon_m" src= "<%= "/user_images/#{@current_user.image_name}" %>">
+      <% end %>
+      <div class="logout">
+        <%= button_to("/logout") do %>
+          <img class="header_logout_m" src= "/menu/logout.png">
+        <% end %>
       </div>
-    <% end %>
+      <% end %>
+
+    </header>
     
     <%= yield %>
+
+    <footer>
+      <ul class="foot_menu">
+        <li>
+          <a href="/posts/index"><img class="f_menu" src="/menu/home.png"></a>
+        </li>
+        <li>
+          <a href="/emoji"><img class="f_menu" src="/menu/emoji.png"></a>
+        </li>
+        <li>
+          <a href="/emoji/new"><img class="f_menu" src="/menu/emoji_new.png"></a>
+        </li>
+        <li>
+          <a href="/posts/new"><img class="f_menu" src="/menu/post.png"></a>
+        </li>
+      </ul>
+    </footer>
   </body>
 </html>
