@@ -1,0 +1,115 @@
+<div class="main posts-index">
+  <div class="container">
+    <% @posts.each do |post| %>
+      <% content=post.content %>
+      <% name=post.user.name %>
+      <% @emojis.each do |emoji| %>
+        <% if emoji.gif %>
+            <% content.gsub!(/:#{emoji.content}:/,"\<img class=\"emoji\" src=\"/emoji/#{emoji.content}.gif\"\>") %>
+            <% name.gsub!(/:#{emoji.content}:/,"\<img class=\"user-emoji\" src=\"/emoji/#{emoji.content}.gif\"\>") %>
+        <% else %>
+          <% post.content.gsub!(/:#{emoji.content}:/,"\<img class=\"emoji\" src=\"/emoji/#{emoji.content}.png\"\>") %>
+          <% name.gsub!(/:#{emoji.content}:/,"\<img class=\"user-emoji\" src=\"/emoji/#{emoji.content}.png\"\>") %>
+        <% end %>
+      <% end %>
+      <div class="posts-index-item">
+        <div class="post-left">
+          <img src="<%= "/user_images/#{post.user.image_name}" %>">
+        </div>
+        <div class="post-user-name">
+          <%= link_to("/users/#{post.user.id}") do %>
+            <%== name %>
+          <% end %>
+        </div>
+        <div class="post-main">
+          <p>
+            <%== content.gsub(/な/,"にゃ") %>
+          </p>
+        </div>
+        <div class="post-imgs">
+          <% if post.image_name %>
+            <a href="<%= "/post_images/#{post.image_name}" %>" data-lightbox="group">
+              <img class="post-img" src="<%= "/post_images/#{post.image_name}" %>">
+            </a>
+            <br>
+          <% end %>
+          <% if post.image_name1 %>
+            <a href="<%= "/post_images/#{post.image_name1}" %>" data-lightbox="group">
+              <img class="post-img" src="<%= "/post_images/#{post.image_name1}" %>">
+            </a>
+            <br>
+          <% end %>
+          <% if post.image_name2 %>
+            <a href="<%= "/post_images/#{post.image_name2}" %>" data-lightbox="group">
+              <img class="post-img" src="<%= "/post_images/#{post.image_name2}" %>">
+            </a>
+            <br>
+          <% end %>
+          <% if post.image_name3 %>
+            <a href="<%= "/post_images/#{post.image_name3}" %>" data-lightbox="group">
+              <img class="post-img" src="<%= "/post_images/#{post.image_name3}" %>">
+            </a>
+            <br>
+          <% end %>
+        </div>
+        <% if post.quote_id %>
+          <% quote=Post.find_by(id: post.quote_id) %>
+          <div class="quote-from">
+          <% if quote %>
+            <% quote_name=quote.user.name %>
+            <% @emojis.each do |emoji| %>
+                <% quote.content.gsub!(/:#{emoji.content}:/,"\<img class=\"emoji\" src=\"/emoji/#{emoji.content}.png\"\>") %>
+                <% quote_name.gsub!(/:#{emoji.content}:/,"\<img class=\"user-emoji\" src=\"/emoji/#{emoji.content}.png\"\>") %>
+            <% end %>
+            <div class="post-left">
+                <img src="<%= "/user_images/#{quote.user.image_name}" %>">
+            </div>
+            <div class="post-user-name">
+                <%= link_to("/users/#{quote.user.id}") do %>
+                  <%== quote_name %>
+                <% end %>
+            </div>
+            <div class="post-main">
+                <p>
+                <%== quote.content.gsub(/な/,"にゃ") %>
+                </p>
+            </div>
+            <div class="post_link">
+              <%= link_to("投稿の詳細へ", "/posts/#{quote.id}") %>
+            </div>
+          <% else %>
+              <p>投稿は削除されました</p>
+          <% end %>
+          </div>
+        <% end %>
+        <% if @current_user %>
+        <div class="reactions">
+          <div class="quote">
+            <% if @current_user %>
+              <%= link_to("/posts/#{post.id}/quote") do %>
+                <span class="fa fa-duotone fa-retweet"></span>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="like">
+            <% if Like.find_by(user_id: @current_user.id, post_id: post.id) %>
+              <%= button_to("/likes/#{post.id}/index_destroy",{method:"post"}) do %>
+                <span class="fa fa-heart liked-btn"></span>
+              <% end %>
+            <% else %>
+              <%= button_to("/likes/#{post.id}/index_create", {method: "post"}) do %>
+              <span class="fa fa-heart unliked-btn"></span>
+              <% end %>
+            <% end %>
+            <%= @likes_count.where(post_id:post.id).count %>
+          </div>
+        </div>
+        <% end %>
+        
+        <div class="post_link">
+          <%= link_to("投稿の詳細へ", "/posts/#{post.id}") %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

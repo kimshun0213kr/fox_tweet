@@ -1,0 +1,14 @@
+<div class="main posts-new">
+    <%= form_tag("/emoji/create",{multipart: true}) do %>
+        <div class="form">
+            <div class="form-body">
+                <p>絵文字の名前を英数字、及び_を使用して入力してください。</p>
+                <textarea name="content"></textarea>
+                <input name="image" type="file" value="画像を選択してください。">
+                <p>GIFファイルは以下のフォームから選択してください。</p>
+                <input name="image_gif" type="file" value="画像を選択してください。">
+                <input type="submit" value="追加">
+            </div>
+        </div>
+    <% end %>
+</div>

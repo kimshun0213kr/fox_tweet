@@ -1,0 +1,27 @@
+<div class="main posts-new">
+  <div class="container">
+    <h1 class="form-heading">投稿する</h1>
+      <% @post.errors.full_messages.each do |message| %>
+        <div class="form-error">
+          <%= message %>
+        </div>
+      <% end %>
+      <%= form_tag("/posts/create",{multipart: true}) do %>
+        <div class="form">
+          <div class="form-body">
+            <textarea name="content"><%= @post.content %></textarea>
+            <p>カスタム絵文字を使うときは、:絵文字名:と記述してください。</p>
+            <p>使用可能なカスタム絵文字はメニューから確認してください。</p>
+            <p>画像を追加する場合は以下から選択してください。</p>
+            <input name="image" type="file">
+            <input name="image1" type="file">
+            <input name="image2" type="file">
+            <input name="image3" type="file">
+            <% if @current_user %>
+              <input type="submit" value="投稿">
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+  </div>
+</div>

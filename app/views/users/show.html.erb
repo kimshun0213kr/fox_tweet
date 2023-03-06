@@ -1,0 +1,103 @@
+<div class="main user-show">
+    <div class="container">
+        <div class="user">
+            <% name=@user.name %>
+            <% @emojis.each do |emoji| %>
+                <% if emoji.gif %>
+                    <% name.gsub!(/:#{emoji.content}:/,"\<img class=\"user-emoji\" src=\"/emoji/#{emoji.content}.gif\"\>") %>
+                <% else %>
+                    <% name.gsub!(/:#{emoji.content}:/,"\<img class=\"user-emoji\" src=\"/emoji/#{emoji.content}.png\"\>") %>
+                <% end %>
+            <% end %>
+            <img class="user_icon" src="<%= "/user_images/#{@user.image_name}" %>">
+            <h2><%== name %></h2>
+            <p><%= @user.email %></p>
+            <% if @current_user %>
+                <% if @user.id == @current_user.id %>
+                    <%= link_to("編集","/users/#{@user.id}/edit") %>
+                <% end %>
+            <% end %>
+        </div>
+
+        <ul class="user-tabs">
+            <li class="active"><%= link_to("投稿", "/users/#{@user.id}") %></li>
+            <li><%= link_to("いいね!", "/users/#{@user.id}/likes") %></li>
+        </ul>
+        <% posts=@user.posts.order(created_at: :desc) %>
+        <% posts.each do |post| %>
+            <% content=post.content %>
+            <% name=post.user.name %>
+            <% @emojis.each do |emoji| %>
+              <% if emoji.gif %>
+                  <% content.gsub!(/:#{emoji.content}:/,"\<img class=\"emoji\" src=\"/emoji/#{emoji.content}.gif\"\>") %>
+                  <% name.gsub!(/:#{emoji.content}:/,"\<img class=\"user-emoji\" src=\"/emoji/#{emoji.content}.gif\"\>") %>
+              <% else %>
+                <% post.content.gsub!(/:#{emoji.content}:/,"\<img class=\"emoji\" src=\"/emoji/#{emoji.content}.png\"\>") %>
+                <% name.gsub!(/:#{emoji.content}:/,"\<img class=\"user-emoji\" src=\"/emoji/#{emoji.content}.png\"\>") %>
+              <% end %>
+            <% end %>
+            <div class="posts-index-item">
+                <div class="post-left">
+                <img src="<%= "/user_images/#{post.user.image_name}" %>">
+                </div>
+                <div class="post-right">
+                <div class="post-user-name">
+                    <%= link_to("/users/#{post.user.id}") do %>
+                        <%== name %>
+                    <% end %>
+                </div>
+                <%== content.gsub(/な/,"にゃ") %>
+                <br>
+                <% if post.image_name %>
+                    <img class="post-img" src="<%= "/post_images/#{post.image_name}" %>">
+                    <br>
+                    <% end %>
+                    <% if post.image_name1 %>
+                    <img class="post-img" src="<%= "/post_images/#{post.image_name1}" %>">
+                    <br>
+                    <% end %>
+                    <% if post.image_name2 %>
+                    <img class="post-img" src="<%= "/post_images/#{post.image_name2}" %>">
+                    <br>
+                    <% end %>
+                    <% if post.image_name3 %>
+                    <img class="post-img" src="<%= "/post_images/#{post.image_name3}" %>">
+                    <br>
+                <% end %>
+                <% if post.quote_id %>
+                    <% quote=Post.find_by(id: post.quote_id) %>
+                    <% name=quote.user.name %>
+                    <div class="quote-from">
+                    <% if quote %>
+                        <% @emojis.each do |emoji| %>
+                            <% quote.content.gsub!(/:#{emoji.content}:/,"\<img class=\"emoji\" src=\"/emoji/#{emoji.content}.png\"\>") %>
+                            <% name.gsub!(/:#{emoji.content}:/,"\<img class=\"user-emoji\" src=\"/emoji/#{emoji.content}.png\"\>") %>
+                        <% end %>
+                        <div class="post-left">
+                            <img src="<%= "/user_images/#{quote.user.image_name}" %>">
+                        </div>
+                        <div class="post-user-name">
+                            <%= link_to("/users/#{quote.user.id}") do %>
+                                <%== name %>
+                            <% end %>
+                        </div>
+                        <div class="post-main">
+                            <p>
+                            <%== quote.content.gsub(/な/,"にゃ") %>
+                            </p>
+                        </div>
+                        <div class="post_link">
+                        <%= link_to("投稿の詳細へ", "/posts/#{quote.id}") %>
+                    <% else %>
+                            <p>投稿は削除されました</p>
+                    <% end %>
+                        </div>
+                        
+                    </div>
+                <% end %>
+                <%== link_to("投稿の詳細へ", "/posts/#{post.id}") %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</div>

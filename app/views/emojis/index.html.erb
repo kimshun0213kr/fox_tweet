@@ -1,0 +1,16 @@
+<div class="main emojis-index">
+    <h1>現在使用可能なカスタム絵文字</h1>
+    <% @emojis.each do |emoji| %>
+        <div class="emojis">
+            <% if emoji.gif %>
+            <image class="emoji" src="<%= "/emoji/#{emoji.content}.gif" %>">
+            <% else %>
+                <image class="emoji" src="<%= "/emoji/#{emoji.content}.png" %>">
+            <% end %>
+            <%= emoji.content %>
+        </div>
+    <% end %>
+    <% if @current_user %>
+        <a href="/emoji/new">追加フォーム</a>
+    <% end %>
+</div>

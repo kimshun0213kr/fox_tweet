@@ -1,0 +1,46 @@
+<div class="main posts-new">
+  <div class="container">
+    <h1 class="form-heading">引用する</h1>
+  </div>
+  <% @post.errors.full_messages.each do |message| %>
+    <div class="form-error">
+        <%= message %>
+    </div>
+  <% end %>
+  <%= form_tag("/posts/quote",{multipart: true}) do %>
+  <div class="form">
+  <div class="form-body">
+    <textarea name="content"></textarea>
+    <div class="quote-from">
+    <% name=@post.user.name %>
+        <% @emojis.each do |emoji| %>
+            <% @post.content.gsub!(/:#{emoji.content}:/,"\<img class=\"emoji\" src=\"/emoji/#{emoji.content}.png\"\>") %>
+            <% name.gsub!(/:#{emoji.content}:/,"\<img class=\"user-emoji\" src=\"/emoji/#{emoji.content}.png\"\>") %>
+        <% end %>
+        <div class="post-left">
+            <img src="<%= "/user_images/#{@post.user.image_name}" %>">
+        </div>
+        <div class="post-user-name">
+            <%= link_to("/users/#{@post.user.id}") do %>
+                <%== name %>
+            <% end %>
+        </div>
+        <div class="post-main">
+            <p>
+            <%== @post.content.gsub(/な/,"にゃ") %>
+            </p>
+        </div>
+    </div>
+    <p>カスタム絵文字を使うときは、:絵文字名:と記述してください。</p>
+    <p>使用可能なカスタム絵文字はメニューから確認してください。</p>
+    <p>画像を追加する場合は以下から選択してください。</p>
+    <input name="image" type="file">
+    <input name="image1" type="file">
+    <input name="image2" type="file">
+    <input name="image3" type="file">
+    <textarea class="hidden" name="quote"><%= @post.id %></textarea>
+    <input type="submit" value="投稿">
+    </div>
+  </div>
+  <% end %>
+</div>
