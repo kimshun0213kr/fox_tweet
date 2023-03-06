@@ -694,13 +694,21 @@
     .header-menus_min {
         color:white;
         float:right;
+        margin-right: 20px;
+        position: sticky;
+        top :0px;
     }
     .header-menus_min ul {
         color:white;
     }
     .header-menus_min li {
         color:white;
-        background-color: #4d3217;
+        background-color: #fc8819;
+    }
+
+    .menu_img{
+        width: 125px;
+        vertical-align: middle;
     }
 
     /* top ================================ */

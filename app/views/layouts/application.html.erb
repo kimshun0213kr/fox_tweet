@@ -56,7 +56,11 @@
         <% end %>
       </ul>
       <% if @current_user %>
-      <ul class="header-menus_min">
+      <details class="header-menus_min">
+      <summary>
+        <img class="menu_img" src="/menu/menu.png">
+      </summary>
+      <ul>
           <li>
             <%= link_to("きつねのお部屋", "https://dengeki-tdu.github.io/DENGEKI/") %>
           </li>
@@ -78,6 +82,7 @@
             <%= button_to("ログアウト", "/logout", {method: "post"}) %>
           </li>
         </ul>
+        </details>
         <% else %>
             <%= link_to("きつねのお部屋", "https://dengeki-tdu.github.io/DENGEKI/") %>
         <% end %>
