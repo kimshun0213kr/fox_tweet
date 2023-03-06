@@ -590,6 +590,10 @@ button{
   margin: 0 auto;
 }
 
+.emojis-index{
+  margin:120 auto;
+}
+
 @media screen and (max-width: 960px)
 {
   /*
@@ -668,7 +672,7 @@ body {
 }
 
 .container {
-  max-width: 980px;
+  max-width: 100%;
   margin: 120px auto;
   padding-left: 15px;
   padding-right: 15px;
@@ -1182,5 +1186,10 @@ button{
 
 .emojis{
   margin: 0 auto;
-}}
+}
 
+.emojis-index{
+  margin:120 auto;
+}
+
+}
