@@ -17,13 +17,21 @@
           <img src="<%= "/user_images/#{post.user.image_name}" %>">
         </div>
         <div class="post-user-name">
+        <% if @current_user %>
           <%= link_to("/users/#{post.user.id}") do %>
             <%== name %>
           <% end %>
+        <% else %>
+          <%== name %>
+        <% end %>
         </div>
         <div class="post-main">
           <p>
-            <%= link_to("/posts/#{post.id}") do %>
+            <% if @current_user %>
+              <%= link_to("/posts/#{post.id}") do %>
+                <%== content.gsub(/な/,"にゃ") %>
+              <% end %>
+            <% else %>
               <%== content.gsub(/な/,"にゃ") %>
             <% end %>
           </p>
@@ -66,16 +74,24 @@
             <div class="post-left">
                 <img src="<%= "/user_images/#{quote.user.image_name}" %>">
             </div>
-            <div class="post-user-name">
+            <div class="post-user-name quote_name">
+              <% if @current_user %>
                 <%= link_to("/users/#{quote.user.id}") do %>
                   <%== quote_name %>
                 <% end %>
+              <% else %>
+                <%== quote_name %>
+              <% end %>
             </div>
             <div class="post-main">
                 <p>
-                <%= link_to("/posts/#{quote.id}") do %>
-                  <%== quote.content.gsub(/な/,"にゃ") %>
-                <% end %>
+                <% if @current_user %>
+              <%= link_to("/posts/#{post.id}") do %>
+                <%== quote.content.gsub(/な/,"にゃ") %>
+              <% end %>
+            <% else %>
+              <%== quote.content.gsub(/な/,"にゃ") %>
+            <% end %>
                 </p>
             </div>
             <div class="post_link">

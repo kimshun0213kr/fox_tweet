@@ -67,12 +67,13 @@
               <% end %>
           </div>
           <div class="post-main">
+            <%= link_to("/posts/#{quote.id}") do %>
               <p>
-              <%== quote.content.gsub(/な/,"にゃ") %>
+                  <%== quote.content.gsub(/な/,"にゃ") %>
               </p>
+            <% end %>
           </div>
           <div class="post_link">
-            <%= link_to("投稿の詳細へ", "/posts/#{quote.id}") %>
           </div>
         <% else %>
             <p>投稿は削除されました</p>

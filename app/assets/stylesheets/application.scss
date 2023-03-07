@@ -1,6 +1,10 @@
-@media screen and (min-width: 961px){
+@media screen and (min-width: 756px){
     .header-menus_min,.header_icon_m,.header_logout_m,footer{
         display: none;
+    }
+
+    .fullheight{
+        height:100%;
     }
 
     .header_icon{
@@ -54,13 +58,12 @@
     color: #1e1e1e;
     background-color: #fc8819;
     margin: 0;
-    min-height: 1vh;
+    min-height: 100vh;
     }
 
     .main {
     top: 0px;
     width: 100%;
-    height: auto;
     min-height: 100%;
     background-color: #f5f8fa;
     }
@@ -595,13 +598,22 @@
     .emojis-index{
     margin:240 auto;
     }
+
+    .quote_name{
+        margin-left: 60px;
+    }
 }
 
-@media screen and (max-width: 960px){
+@media screen and (max-width: 755px){
     .header_icon{
         height: 64px;
         vertical-align: middle;
     }
+
+    .fullheight{
+        min-height:100vh;
+    }
+    
     .user-emoji{
         width:32px;
         vertical-align: middle;
@@ -655,7 +667,6 @@
     .main {
     top: 0px;
     width: 100%;
-    height: auto;
     min-height: 100%;
     background-color: #f5f8fa;
     }
