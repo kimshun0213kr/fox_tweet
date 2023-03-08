@@ -55,7 +55,7 @@
         <div class="quote-from">
         <% if quote %>
         <% q_content=safe_join(quote.content.split("\n"),tag(:br)) %>
-        <% q_content=text_url_to_link(h(content)).html_safe %>
+        <% q_content=text_url_to_link(h(q_content)).html_safe %>
           <% quote_name=quote.user.name %>
           <% @emojis.each do |emoji| %>
               <% q_content.gsub!(/:#{emoji.content}:/,"\<img class=\"emoji\" src=\"/emoji/#{emoji.content}.png\"\>") %>

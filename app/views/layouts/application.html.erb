@@ -68,8 +68,8 @@
     <div class="fullheight">
       <%= yield %>
     </div>
-    <footer>
     <% if @current_user %>
+    <footer>
       <ul class="foot_menu">
         <li>
           <a href="/posts/index"><img class="f_menu" src="/menu/home.png"></a>
@@ -84,7 +84,7 @@
           <a href="/posts/new"><img class="f_menu" src="/menu/post.png"></a>
         </li>
       </ul>
-    <% end %>
     </footer>
+    <% end %>
   </body>
 </html>
