@@ -11,7 +11,6 @@ module ApplicationHelper
 
         text.gsub!(url, sub_text)
         end
-
         return text
     end
 end
