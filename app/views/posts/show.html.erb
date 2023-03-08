@@ -1,7 +1,7 @@
 <div class="main posts-show">
   <div class="container">
     <div class="posts-show-item">
-      <% content=@post.content %>
+    <% content=safe_join(@post.content.split("\n"),tag(:br)) %>
       <% name=@post.user.name %>
       <% @emojis.each do |emoji| %>
         <% if emoji.gif %>
@@ -53,9 +53,10 @@
         <% quote=Post.find_by(id: @post.quote_id) %>
         <div class="quote-from">
         <% if quote %>
+        <% q_content=safe_join(quote.content.split("\n"),tag(:br)) %>
           <% quote_name=quote.user.name %>
           <% @emojis.each do |emoji| %>
-              <% quote.content.gsub!(/:#{emoji.content}:/,"\<img class=\"emoji\" src=\"/emoji/#{emoji.content}.png\"\>") %>
+              <% q_content.gsub!(/:#{emoji.content}:/,"\<img class=\"emoji\" src=\"/emoji/#{emoji.content}.png\"\>") %>
               <% quote_name.gsub!(/:#{emoji.content}:/,"\<img class=\"emoji\" src=\"/emoji/#{emoji.content}.png\"\>") %>
           <% end %>
           <div class="post-left">
@@ -69,7 +70,7 @@
           <div class="post-main">
             <%= link_to("/posts/#{quote.id}") do %>
               <p>
-                  <%== quote.content.gsub(/な/,"にゃ") %>
+                  <%== q_content.gsub(/な/,"にゃ") %>
               </p>
             <% end %>
           </div>
