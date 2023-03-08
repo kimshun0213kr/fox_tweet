@@ -1,14 +1,14 @@
 <div class="main posts-index">
   <div class="container">
     <% @posts.each do |post| %>
-      <% content=post.content %>
+      <% content=safe_join(post.content.split("\n"),tag(:br)) %>
       <% name=post.user.name %>
       <% @emojis.each do |emoji| %>
         <% if emoji.gif %>
             <% content.gsub!(/:#{emoji.content}:/,"\<img class=\"emoji\" src=\"/emoji/#{emoji.content}.gif\"\>") %>
             <% name.gsub!(/:#{emoji.content}:/,"\<img class=\"user-emoji\" src=\"/emoji/#{emoji.content}.gif\"\>") %>
         <% else %>
-          <% post.content.gsub!(/:#{emoji.content}:/,"\<img class=\"emoji\" src=\"/emoji/#{emoji.content}.png\"\>") %>
+          <% content.gsub!(/:#{emoji.content}:/,"\<img class=\"emoji\" src=\"/emoji/#{emoji.content}.png\"\>") %>
           <% name.gsub!(/:#{emoji.content}:/,"\<img class=\"user-emoji\" src=\"/emoji/#{emoji.content}.png\"\>") %>
         <% end %>
       <% end %>
@@ -25,17 +25,21 @@
           <%== name %>
         <% end %>
         </div>
-        <div class="post-main">
-          <p>
-            <% if @current_user %>
-              <%= link_to("/posts/#{post.id}") do %>
+        <% if @current_user %>
+          <%= link_to("/posts/#{post.id}") do %>
+            <div class="post-main">
+              <p>
                 <%== content.gsub(/な/,"にゃ") %>
-              <% end %>
-            <% else %>
+              </p>
+            </div>
+          <% end %>
+          <% else %>
+          <div class="post-main">
+            <p>
               <%== content.gsub(/な/,"にゃ") %>
-            <% end %>
-          </p>
-        </div>
+            </p>
+          </div>
+        <% end %>
         <div class="post-imgs">
           <% if post.image_name %>
             <a href="<%= "/post_images/#{post.image_name}" %>" data-lightbox="group">
