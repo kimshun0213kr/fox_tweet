@@ -70,9 +70,10 @@
           <% quote=Post.find_by(id: post.quote_id) %>
           <div class="quote-from">
           <% if quote %>
+            <% q_content=safe_join(quote.content.split("\n"),tag(:br)) %>
             <% quote_name=quote.user.name %>
             <% @emojis.each do |emoji| %>
-                <% quote.content.gsub!(/:#{emoji.content}:/,"\<img class=\"emoji\" src=\"/emoji/#{emoji.content}.png\"\>") %>
+                <% q_content.gsub!(/:#{emoji.content}:/,"\<img class=\"emoji\" src=\"/emoji/#{emoji.content}.png\"\>") %>
                 <% quote_name.gsub!(/:#{emoji.content}:/,"\<img class=\"user-emoji\" src=\"/emoji/#{emoji.content}.png\"\>") %>
             <% end %>
             <div class="post-left">
@@ -87,17 +88,19 @@
                 <%== quote_name %>
               <% end %>
             </div>
-            <div class="post-main">
+            <% if @current_user %>
+            <%= link_to("/posts/#{post.id}") do %>
+              <div class="post-main">
                 <p>
-                <% if @current_user %>
-              <%= link_to("/posts/#{post.id}") do %>
-                <%== quote.content.gsub(/な/,"にゃ") %>
-              <% end %>
-            <% else %>
-              <%== quote.content.gsub(/な/,"にゃ") %>
+                <%== q_content.gsub(/な/,"にゃ") %>
+                  </p>
+              </div>
             <% end %>
-                </p>
-            </div>
+            <% else %>
+              <div class="post-main">
+                <%== q_content.gsub(/な/,"にゃ") %>
+              </div>
+            <% end %>
             <div class="post_link">
             </div>
           <% else %>
