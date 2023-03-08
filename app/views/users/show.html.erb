@@ -46,7 +46,21 @@
                         <%== name %>
                     <% end %>
                 </div>
-                <%== content.gsub(/な/,"にゃ") %>
+                <% if @current_user %>
+                <%= link_to("/posts/#{post.id}") do %>
+                    <div class="post-main">
+                    <p>
+                        <%== content.gsub(/な/,"にゃ") %>
+                    </p>
+                    </div>
+                <% end %>
+                <% else %>
+                <div class="post-main">
+                    <p>
+                    <%== content.gsub(/な/,"にゃ") %>
+                    </p>
+                </div>
+                <% end %>
                 <br>
                 <% if post.image_name %>
                     <img class="post-img" src="<%= "/post_images/#{post.image_name}" %>">
@@ -69,6 +83,7 @@
                     <% name=quote.user.name %>
                     <div class="quote-from">
                     <% if quote %>
+                        <% q_content=safe_join(quote.content.split("\n"),tag(:br)) %>
                         <% @emojis.each do |emoji| %>
                             <% quote.content.gsub!(/:#{emoji.content}:/,"\<img class=\"emoji\" src=\"/emoji/#{emoji.content}.png\"\>") %>
                             <% name.gsub!(/:#{emoji.content}:/,"\<img class=\"user-emoji\" src=\"/emoji/#{emoji.content}.png\"\>") %>
@@ -81,13 +96,20 @@
                                 <%== name %>
                             <% end %>
                         </div>
+                        <% if @current_user %>
+                        <%= link_to("/posts/#{post.id}") do %>
                         <div class="post-main">
                             <p>
-                            <%== quote.content.gsub(/な/,"にゃ") %>
+                            <%== q_content.gsub(/な/,"にゃ") %>
                             </p>
                         </div>
+                        <% end %>
+                        <% else %>
+                        <div class="post-main">
+                            <%== q_content.gsub(/な/,"にゃ") %>
+                        </div>
+                        <% end %>
                         <div class="post_link">
-                        <%= link_to("投稿の詳細へ", "/posts/#{quote.id}") %>
                     <% else %>
                             <p>投稿は削除されました</p>
                     <% end %>
@@ -95,7 +117,6 @@
                         
                     </div>
                 <% end %>
-                <%== link_to("投稿の詳細へ", "/posts/#{post.id}") %>
                 </div>
             </div>
         <% end %>
