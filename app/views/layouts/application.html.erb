@@ -62,6 +62,12 @@
           <img class="header_logout_m" src= "/menu/logout.png">
         <% end %>
       </div>
+      <% else %>
+      <div class="logout">
+        <%= button_to("/logout") do %>
+          <img class="header_logout_m" src= "/menu/logout.png">
+        <% end %>
+      </div>
       <% end %>
 
     </header>
